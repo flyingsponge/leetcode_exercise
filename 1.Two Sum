@@ -13,8 +13,9 @@ public:
             {
                 twoSum.push_back(i);
                 twoSum.push_back(test_map[target-nums[i]]);
+                break;
             }
-            break;
+           
         }
        return twoSum; 
     }
