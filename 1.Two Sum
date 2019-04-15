@@ -5,7 +5,7 @@ public:
         vector<int> twoSum;
         for(int j;j<nums.size();j++)
         {
-          test_map[target-nums[j]]=j;  
+          test_map[nums[j]]=j;  
         }
         for(int i;i<nums.size();i++)
         {
