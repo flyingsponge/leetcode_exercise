@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> test_map;
+        vector<int> twoSum;
+        for(int j;j<nums.size();j++)
+        {
+          test_map[target-nums[j]]=j;  
+        }
+        for(int i;i<nums.size();i++)
+        {
+            if(test_map.count(target-nums[i])!=0 && test_map[target-nums[i]]!=i)
+            {
+                twoSum.push_back(i);
+                twoSum.push_back(test_map[target-nums[i]]);
+            }
+        }
+       return twoSum; 
+    }
+};
