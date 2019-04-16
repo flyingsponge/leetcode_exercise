@@ -1,16 +1,16 @@
 class Solution {
 public:
     int reverse(int x) {
-        int rev;
-        int pop;
+        int rev=0;
+        int pop=0;
         while(x!=0)
         {
             pop=x%10;
             x=x/10;
             if(rev>INT_MAX/10||(rev==INT_MAX/10 && pop>7))
-                return -1;
+                return 0;
             if(rev<INT_MIN/10||(rev==INT_MIN/10 && pop<-8))
-                return -1;
+                return 0;
             else
                 rev=rev*10+pop;
         }
