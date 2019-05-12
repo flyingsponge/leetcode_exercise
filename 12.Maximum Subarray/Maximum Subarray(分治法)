@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) 
+    {
+      int head=0;
+        int tail=nums.size()-1; 
+        int maxresult=FindMax(nums,head,tail);
+        return maxresult;       
+    }
+    
+    int FindMax(vector<int>& nums,int head,int tail)
+    {   
+        int mid=head+(tail-head)/2;
+        if(head==tail)
+            return nums[head];
+        else
+            return            
+            max(max(FindMax(nums,head,mid),FindMax(nums,mid+1,tail)),FindMid(nums,mid));            
+    }
+    
+        
+    int FindMid(vector<int>& nums,int mid)
+    {
+        int sum1=nums[mid];
+        int sum2=nums[mid];
+        int result1=nums[mid];
+        int result2=nums[mid];
+            for(int i=mid-1;i>=0;i--)
+            {    
+               sum1=sum1+nums[i];
+               if(sum1>result1) 
+                   result1=sum1;                  
+            }
+            for(int j=mid+1;j<=nums.size()-1;j++)
+            {                
+                sum2=sum2+nums[j];
+               if(sum2>result2) 
+                   result2=sum2;           
+            }
+                return result1+result2-nums[mid];        
+    }
+};
