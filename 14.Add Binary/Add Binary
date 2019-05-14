@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+       string c;
+       int m=a.size()-1;
+       int n=b.size()-1;
+       int carry=0;
+       int sum=0;
+       while(m>=0 || n>=0)
+       {
+           int p=m>=0?a[m--]-'0':0;
+           int q=n>=0?b[n--]-'0':0;
+           sum=p+q+carry;
+           carry=sum/2;
+           c=to_string(sum%2)+c;
+       }
+        if(carry==1)
+            c.insert(c.begin(),'1');
+        return c;
+    }
+};
