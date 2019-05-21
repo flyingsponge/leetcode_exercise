@@ -1,0 +1,17 @@
+如果后一个值比前一个值大，我们就进行一次交易，得到局部最优值之和。
+局部最优值>=全局最优值
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int lenth=prices.size();
+        if(lenth<=1)
+            return 0;
+        int profit=0;
+        for(int i=1;i<lenth;i++)
+        {
+            if(prices[i]>prices[i-1])
+                profit+=prices[i]-prices[i-1];
+        }
+        return profit;        
+    }
+};
