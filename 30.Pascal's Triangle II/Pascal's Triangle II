@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> cur_row;
+        vector<int> pre_row;
+        for(int row=0;row<=rowIndex;row++)
+        {
+            cur_row=vector<int>(row+1,0);
+            cur_row[0]=1;
+            cur_row[row]=1;
+            if(pre_row.size()>1)
+            {
+                for(int col=1;col<row;col++)
+                cur_row[col]=pre_row[col-1]+pre_row[col];
+            }            
+            pre_row.swap(cur_row);
+            cur_row.clear();
+        }
+        return pre_row;
+    }
+};
