@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(dividend==INT_MIN&& divisor==-1||divisor==0)
+            return INT_MAX;
+        int sign=(dividend>0)^(divisor>0)?-1:1;
+        long long m=abs((long long)dividend);
+        long long n=abs((long long)divisor);
+        long long res=0;
+        if (n == 1) return sign == 1 ? m : -m;
+        while(m>=n)
+        {
+            int i=1;
+            long long t=n;
+            while(t<<1<m)
+            {
+                t<<=1;
+                i<<=1;                
+            }
+            res+=i;    
+            m-=t;
+        }
+        return res>INT_MAX?INT_MAX:(sign*res);
+    }
+};
