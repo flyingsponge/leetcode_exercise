@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        if(board.empty() || board[0].empty())
+            return false;
+        int m=board.size();
+        int n=board[0].size();
+        vector<vector<bool>> RowFlag(m,vector<bool>(n,false));
+        vector<vector<bool>> ColFlag(m,vector<bool>(n,false));
+        vector<vector<bool>> NineFlag(m,vector<bool>(n,false));
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(board[i][j]>='1'&&board[i][j]<='9')
+                {
+                   int c=board[i][j]-'1';
+                if(RowFlag[i][c] || ColFlag[c][j] || NineFlag[i/3*3+j/3][c] )
+                    return false;
+                RowFlag[i][c]=true;
+                ColFlag[c][j]=true;
+                NineFlag[i/3*3+j/3][c]=true; 
+                }                
+            }
+        }
+        return true;
+    }
+};
