@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> out;
+        sort(nums.begin(),nums.end());
+        subsetsDFS(nums,0,out,res); 
+        return res;
+    }
+    void subsetsDFS(vector<int>& nums,int level,vector<int>& out,vector<vector<int>>& res)
+    {
+        if(level==nums.size())
+        {
+           res.push_back(out);
+           return ; 
+        }            
+        out.push_back(nums[level]);
+        subsetsDFS(nums,level+1,out,res);
+        out.pop_back();
+        subsetsDFS(nums,level+1,out,res);
+    }
+};
