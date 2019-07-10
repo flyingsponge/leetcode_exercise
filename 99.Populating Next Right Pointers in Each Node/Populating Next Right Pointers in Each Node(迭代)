@@ -1,0 +1,38 @@
+    Node* right;
+    Node* next;
+
+    Node() {}
+
+    Node(int _val, Node* _left, Node* _right, Node* _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
+*/
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(!root)
+            return NULL;
+        queue<Node*> Q;
+        Q.push(root);
+        while(!Q.empty())
+        {
+            int size=Q.size();
+            for(int i=0;i<size;i++)
+            {
+                Node* cur=Q.front();
+                Q.pop();
+                if(i<size-1)
+                    cur->next=Q.front();
+                if(cur->left)
+                    Q.push(cur->left);
+                if(cur->right)
+                    Q.push(cur->right);
+            }
+        }
+        return root;
+    }
+};
