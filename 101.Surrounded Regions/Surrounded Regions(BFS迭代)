@@ -1,0 +1,61 @@
+class Solution {
+public:
+    void solve(vector<vector<char>>& board) {
+        if(board.empty()||board[0].empty())
+            return;
+       int n=board.size();
+       int m=board[0].size();
+       for(int i=0;i<n;i++)
+       {
+           for(int j=0;j<m;j++)
+           {
+               if(i!=0&&i!=n-1&&j!=0&&j!=m-1)
+                   continue;
+               if(board[i][j]!='O')
+                   continue;
+               board[i][j]='$';
+               queue<int> Q{{i*m+j}};
+               while(!Q.empty())
+               {
+                   int t=Q.front();
+                   int x=t/m,y=t%m;
+                   Q.pop();
+                   if(y<m-1&&board[x][y+1]=='O')
+                   {
+                       Q.push(t+1);
+                       board[x][y+1]='$';
+                       
+                   }                  
+                   if(y>0&&board[x][y-1]=='O')
+                   {
+                       Q.push(t-1);
+                       board[x][y-1]='$';
+                       
+                   }  
+                   if(x<n-1&&board[x+1][y]=='O')
+                   {
+                       Q.push(t+m);
+                       board[x+1][y]='$';
+                       
+                   }  
+                   if(x>0&&board[x-1][y]=='O')
+                   {
+                       Q.push(t-m);
+                       board[x-1][y]='$';
+               
+                   }    
+               }
+           }
+       }
+       for(int i=0;i<n;i++)
+       {
+           for(int j=0;j<m;j++)
+           {
+               if(board[i][j]=='O')
+                   board[i][j]='X';
+               if(board[i][j]=='$')
+                   board[i][j]='O';              
+           }
+       }
+    }
+};
