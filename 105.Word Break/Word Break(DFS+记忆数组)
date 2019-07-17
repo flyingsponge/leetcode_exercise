@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+unordered_set<string> wordSet(wordDict.begin(),wordDict.end());
+        vector<int> mem(s.size(),-1);
+        return check(s,wordSet,mem,0);
+    }
+bool check(string s,unordered_set<string>& wordSet,vector<int>& mem,int start)
+    {
+        if(start>=s.size())
+            return true;
+        if(mem[start]!=-1)
+            return mem[start];
+        for(int i=start+1;i<=s.size();i++)
+        {
+    if(wordSet.count(s.substr(start,i-start))&&check(s,wordSet,mem,i))
+                return mem[start]=1;
+        }
+    return mem[start]=0;
+    }
+};
