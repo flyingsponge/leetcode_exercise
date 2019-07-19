@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> in(numCourses);
+        vector<vector<int>> graph(numCourses,vector<int>());
+        queue<int> Q;
+        for(auto a:prerequisites)
+        {
+            graph[a[1]].push_back(a[0]);
+            ++in[a[0]];
+        }
+        for(int i=0;i<numCourses;i++)
+        {
+            if(in[i]==0)
+                Q.push(i);
+        }
+        while(!Q.empty())
+        {
+            int t=Q.front();
+            Q.pop();
+            for(auto a:graph[t])
+            {
+                --in[a];
+                if(in[a]==0)
+                    Q.push(a);
+            }                
+        }
+        for(int i=0;i<numCourses;i++)
+        {
+            if(in[i]!=0)
+                return false;
+        }
+        return true;                   
+    }
+};
