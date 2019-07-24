@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int> S;
+        long res=0,num=0;
+        char sign='+';
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]>='0')
+                num=num*10+s[i]-'0';
+            if((s[i]<'0'&&s[i]!=' ')||i==s.size()-1)
+            {
+                if(sign=='+')
+                    S.push(num);
+                if(sign=='-')
+                    S.push(-num);
+                if(sign=='*'||sign=='/')
+                {
+                int tmp=(sign=='*'?S.top()*num:S.top()/num);
+                    S.pop();
+                    S.push(tmp);
+                }
+              sign=s[i]; 
+              num=0;
+            }
+        }
+        while(!S.empty())
+        {
+            res+=S.top();
+            S.pop();
+        }
+        return res;
+    }
+};
