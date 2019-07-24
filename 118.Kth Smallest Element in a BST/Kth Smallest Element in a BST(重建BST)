@@ -1,0 +1,60 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    struct MyTreeNode{
+      int val;
+      int count;
+      MyTreeNode* left;
+      MyTreeNode* right;
+MyTreeNode(int x) : val(x), count(1),left(NULL), right(NULL) {}
+    };
+    
+    MyTreeNode* build(TreeNode* root)
+    {
+        if(!root)
+            return NULL;
+        MyTreeNode* node=new MyTreeNode(root->val);
+        node->left=build(root->left);
+        node->right=build(root->right);
+        if(node->left)           
+            node->count+=node->left->count;           
+        if(node->right)
+            node->count+=node->right->count; 
+        return node;
+    }
+    
+    int kthSmallest(TreeNode* root, int k) {
+        MyTreeNode* node=build(root);
+        return helper(node,k);
+            
+    }
+    int helper(MyTreeNode* root, int k)
+    {
+        if(root->left)
+        {
+            int cnt=root->left->count;
+            if(k<=cnt)
+             return helper(root->left,k);
+            if(k>cnt+1)
+             return helper(root->right,k-cnt-1);
+            return root->val;
+        }
+        else
+        {
+            if(k==1)
+                return root->val;
+            else
+                return helper(root->right,k-1);
+            
+        }
+    }
+       
+};
