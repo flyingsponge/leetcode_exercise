@@ -1,0 +1,36 @@
+遍历数组每个位置，每次都随机生成一个坐标位置，
+然后交换当前遍历位置和随机生成的坐标位置的数字，
+这样如果数组有n个数字，那么我们也随机交换了n组位置，
+从而达到了洗牌的目的，这里需要注意的是i + rand() % (res.size() - i)不能写成rand() % res.size()，
+前面那种写法不是真正的随机分布
+class Solution {
+public:
+    Solution(vector<int>& nums):v(nums) {
+        
+    }
+    
+    /** Resets the array to its original configuration and return it. */
+    vector<int> reset() {
+        return v;
+    }
+    
+    /** Returns a random shuffling of the array. */
+    vector<int> shuffle() {
+        vector<int> res=v;
+        for(int i=0;i<res.size();i++)
+        {
+            int t=i+rand()%(res.size()-i);
+            swap(res[t],res[i]);
+        }
+        return res;
+    }
+private:
+    vector<int> v;
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(nums);
+ * vector<int> param_1 = obj->reset();
+ * vector<int> param_2 = obj->shuffle();
+ */
