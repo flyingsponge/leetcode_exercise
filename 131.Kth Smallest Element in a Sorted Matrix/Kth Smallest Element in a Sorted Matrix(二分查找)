@@ -1,0 +1,23 @@
+
+由于矩阵中不同行之间的元素并不是严格有序的，所以要在每一行都查找一下 mid，使用 upper_bound，
+这个函数是查找第一个大于目标数的元素，如果目标数在比该行的尾元素大，则 upper_bound 返回该行元素的个数，
+如果目标数比该行首元素小，则 upper_bound 返回0, 遍历完所有的行可以找出中间数是第几小的数
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int left=matrix[0][0],right=matrix.back().back();
+        while(left<right)
+        {
+            int cnt=0;
+            int mid=left+(right-left)/2;
+            for(int i=0;i<matrix.size();i++)
+            {               cnt+=upper_bound(matrix[i].begin(),matrix[i].end(),mid)-matrix[i].begin();
+            }
+            if(cnt<k)
+                left=mid+1;
+            else
+                right=mid;                
+        }
+        return left;
+    }
+};
